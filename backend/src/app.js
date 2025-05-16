@@ -1,5 +1,7 @@
 import express from "express";
 import cors from "cors";
+import UserRouter from "./routes/userRoutes.js";
+import ProductRouter from "./routes/productRoutes.js";
 
 const app = express();
 
@@ -14,6 +16,9 @@ app.get("/", (req, res) => {
     resources: ["users", "products"],
   });
 });
+
+app.use("/users", UserRouter);
+app.use("/products", ProductRouter);
 
 app.use((req, res, next) => {
   const error = new Error("Resource Not Found");
@@ -30,3 +35,4 @@ app.use((error, req, res, next) => {
 });
 
 export default app;
+
